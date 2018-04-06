@@ -1,0 +1,85 @@
+<div class="row">
+  <h1 class="col-xs-12">CV <div ng-click="print()" class="btn btn-link btn-xs hidden-print">print this document <span class="glyphicon glyphicon-floppy-save"></span></div></h1>
+  
+  <div class="col-xs-12 col-md-9">
+ 
+
+    <h2>Experience</h2>
+
+     <p>
+     Specialised on Javascript and PHP, I have worked with many different teams and codebases in this two languages and I feel confident that I can be a meaningful member of any team and debug, maintain and improve any code base. To find more about shipped projects and employers recommendations you can <a href="https://www.linkedin.com/in/juanmirodriguez">connect with me on LinkedIn</a>. Here you can find a relation of the different roles I have played over the years and a relation of usual tasks and accomplishments. 
+     </p>
+
+    <uib-tabset active="0" class="hidden-print">
+
+      <uib-tab index="0" heading="Timeline" ng-if="jobs.length > 0">
+
+        <ng-include src="'views/cv/timeline.html'"></ng-include>
+
+      </uib-tab>
+
+      <uib-tab index="1" heading="by Job Title">
+
+        <ng-include src="'views/cv/roles.html'"></ng-include>
+        
+      </uib-tab>
+
+    </uib-tabset>
+
+    <div class="hidden visible-print">
+      <h3>Responsibilities and achievements by role</h3>
+      <ng-include src="'views/cv/roles.html'"></ng-include>      
+      <h3>Jobs sorted by date</h3>
+      <ng-include src="'views/cv/timeline.html'"></ng-include>
+    </div>
+    
+    <h2>Academic Education</h2>
+
+    <h4>Technical Computer Engineering in Computer Systems at E.T.S.I. University of Málaga.</h4>
+    <h4>English, Advanced, EOI of Málaga</h4>
+
+    <div ng-if="courses.length > 0">
+
+      <h2>Courses</h2>
+
+      <table class="table table-responsive">
+        <tr ng-repeat="course in courses">
+          <td>{{ course.year }}</td>
+          <td>{{ course.company }}</td>
+          <td><strong>{{ course.title }}</strong></td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-md-3">
+      <h2>More about the teams</h2>
+      <div class="logo-container" ng-repeat="company in companies" ng-click="openModal(company)">
+        <h3 class="visible-print-block">{{ company.name }}</h3>
+        <img class="hidden-print img-responsive img-thumbnail img-grayscale" src="assets/img/{{ company.logo }}" alt="{{ company.name }} logo" />
+        <p class="visible-print-block">{{ company.description }}</p>
+        <hr>
+      </div>
+  </div>
+
+</div> 
+
+<script type="text/ng-template" id="jobPopoverTemplate.html">
+    <div>
+      <p><small>{{ job.from_date }} - {{ job.to_date }}</small></p>
+      <p>{{ job.description }}</p>
+    </div>
+</script>
+
+<script type="text/ng-template" id="teamModalContent.html">
+    <div class="modal-header">
+      <h3 class="modal-title">{{ company.name }}</h3>
+    </div>
+    <div class="modal-body">
+      {{ company.description }}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+    </div>
+</script>
