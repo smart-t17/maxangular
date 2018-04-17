@@ -19,7 +19,7 @@ its package manager (npm) installed.  You can get them from [http://nodejs.org/]
 Clone the repository using [git][git]:
 
 ```
-git clone https://github.com/juanmirod/ng-portfolio.git
+git clone https://github.com/smartmaxdev/ng-portfolio.git
 cd ng-portfolio
 ```
 
