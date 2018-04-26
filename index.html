@@ -1,115 +1,89 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<html ng-app="app">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>OCR Web</title>
 
-  <title>Maximiliano Ungredda</title>
-  <meta name="description" content="Full-stack web developer personal web, cv and portfolio.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta property="og:title" content="Personal website"/>
-  <meta property="og:site_name" content="Maximiliano Ungredda"/>
-  <meta property="og:description" content="Full-stack web developer personal web, cv and portfolio."/>
-
-  <!-- Bootstrap 3 Cosmo theme -->
-  <link rel="stylesheet" href="bower_components/bootswatch-dist/css/bootstrap.css">
-  <link rel="stylesheet" href="bower_components/highlightjs/styles/github.css">
-
-  <link rel="stylesheet" href="app.css">
+    <link rel="shortcut icon" href="icon.ico" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!--Jquery,bootstrap,angular,fa-icons JS CDN's-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.min.css">
+    <link type="text/css" rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!--Local links-->
+    <link rel='stylesheet' href='stylesheets/style.css'/>
+    <script type="text/javascript" src="javascripts/ctrl.js"></script>
+
 </head>
-<body ng-controller="AppController">
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+<body ng-controller="ctrl">
+<div class="container ">
+    <div class="">
+        <h1><i class="fa fa-search faa-pulse animated"></i> OCR Web</h1>
+        <!-- <p>This is an OCR app</p></div>-->
+        <label class="">Upload Image</label>
+        <div class="text-center">
+            <div class="form-group " style="width:109%">
 
+                <div class="">
+                    <form action="/api/getText" enctype="multipart/form-data" method="post" target="frame">
 
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button"
-                class="navbar-toggle collapsed"
-                ng-click="isCollapsed = !isCollapsed"
-                aria-expanded="false"
-                aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Maximiliano</a>
-      </div>
-      <div id="navbar" class="navbar-collapse" uib-collapse="isCollapsed">
-        <ul class="nav navbar-nav">
-          <!-- Visible to anyone -->
-          <li ng-class="{active: ($location.path() == '/about')}">
-            <a href="#!/">About</a>
-          </li>
+                        <div class="input-group col-md-10 col-sm-10">
+                            <!--Browse button-->
+                            <span class="input-group-btn btn-file "><!-- ng-change="fileUpload();"-->
+                                <button class="btn btn-primary"> Browse…
+                                 <i class="fa fa-folder-open faa-horizontal animated"></i></button>
+                                <!--Accepts only image files-->
+                                 <input type="file" name="image" id="image" accept="image/*"    >
+                            </span>
 
-          <!-- Only visible if you access with the profile/cv request param -->
-          <li ng-class="{active: ($location.path() == '/cv')}">
-            <a href="#!/cv">CV</a>
-          </li>
-          <li ng-class="{active: ($location.path() == '/skills')}">
-            <a href="#!/skills">Skills</a>
-          </li>
+                            <input class="form-control" placeholder="Select File" readonly>
+                            <span class="input-group-btn">
+                                <button class="btn btn-success ">Upload
+                            <i class="fa fa-upload faa-float animated"></i> </button></span>
+                        </div>
 
-          <li ng-class="{active: ($location.path() == '/oss')}">
-            <a href="#!/oss">oss contributions</a>
-          </li>
+                    </form>
+                    <!--<div class="input-group">
 
-        </ul>
-        <!-- I don't need this right now, but I leave it here by now...
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="../navbar/">Default</a></li>
-          <li><a href="../navbar-static-top/">Static top</a></li>
-          <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-        </ul>
-        -->
-      </div><!--/.nav-collapse -->
+                    <form action="/api/getText" enctype="multipart/form-data" method="post" target="frame">
+
+                        <span class="input-group-btn">
+                           <span class="btn btn-primary"> Browse… </span>
+
+                        </span>
+                        <input type="file" id="image" name="image"/>
+                        <span class="input-group-btn">
+                            <input class="btn btn-success " type="submit" value="Upload File" name="submit"></span>
+                    </form>
+                    </div>-->
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <br><br>
+                        <!--Display uploaded image-->
+                        <img id='img-upload' class="img-rounded box"
+                             src="https://media.giphy.com/media/l46Cy1rHbQ92uuLXa/giphy.gif"/>
+                    </div>
+                    <div class="col-md-6 col-sm-6"><br><br>
+                        <!--MultiPart FormData response stored here-->
+                        <iframe id="frame" name="frame" class="iframe well box" height="500px"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </nav>
+</div>
 
-  <div class="container">
-
-    <uib-alert type="warning" ng-show="showCookieAlert" close="showCookieAlert = false">
-      This page uses cookies to improve your experience <br class="visible-xs-block"> <span class="label label-primary" ng-click="$parent.close({$event: $event})">Ok, I don't mind</span> <span class="label label-primary" ng-click="disableCookies()">I don't want cookies</span>
-    </uib-alert>
-
-    <div ng-view>
-
-    </div>
-
-  </div>
-
-  <footer class="container">
-    <div class="row">
-      <div class="col-md-6">
-      <p>Copyright © 2017, Maximiliano Ungredda. All rights reserved
-      </div>
-    </div>
-  </footer>
-
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="bower_components/highlightjs/highlight.pack.js"></script>
-  <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
-  <script src="config.js"></script>
-  <script src="app.js"></script>
-  <script src="views/about/about.js"></script>
-  <script src="views/cv/cv.js"></script>
-  <script src="views/skills/skills.js"></script>
-  <script src="views/contributions/oss.js"></script>
 </body>
 </html>
